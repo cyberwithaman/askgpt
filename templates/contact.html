@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - AskGPT{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 mb-5">
+        <h1 class="text-center text-gradient">
+            <i class="fas fa-envelope me-3"></i>Contact Us
+        </h1>
+        <p class="text-center lead">
+            <i class="fas fa-info-circle me-2"></i>Get in touch with our team
+        </p>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="glass-card">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <label for="name" class="form-label">
+                            <i class="fas fa-user"></i>Your Name
+                        </label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope"></i>Email Address
+                        </label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="subject" class="form-label">
+                        <i class="fas fa-tag"></i>Subject
+                    </label>
+                    <input type="text" class="form-control" id="subject" name="subject" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="message" class="form-label">
+                        <i class="far fa-comment-alt"></i>Message
+                    </label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required style="border-radius: 15px;"></textarea>
+                </div>
+                
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane me-2"></i>Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Information -->
+<div class="row mt-5">
+    <div class="col-md-4 mb-4">
+        <div class="glass-card text-center h-100">
+            <div class="rounded-circle p-3 d-inline-block mb-3" style="background: var(--primary-gradient);">
+                <i class="fas fa-map-marker-alt fa-2x text-white"></i>
+            </div>
+            <h5 class="text-gradient">Our Location</h5>
+            <p class="mb-0">123 AI Street, Tech Valley<br>San Francisco, CA 94103</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="glass-card text-center h-100">
+            <div class="rounded-circle p-3 d-inline-block mb-3" style="background: var(--success-gradient);">
+                <i class="fas fa-phone-alt fa-2x text-white"></i>
+            </div>
+            <h5 class="text-gradient">Phone Number</h5>
+            <p class="mb-0">+1 (555) 123-4567<br>+1 (555) 987-6543</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="glass-card text-center h-100">
+            <div class="rounded-circle p-3 d-inline-block mb-3" style="background: var(--info-gradient);">
+                <i class="fas fa-envelope fa-2x text-white"></i>
+            </div>
+            <h5 class="text-gradient">Email Address</h5>
+            <p class="mb-0">info@askgpt.example<br>support@askgpt.example</p>
+        </div>
+    </div>
+</div>
+
+<!-- Social Media -->
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="glass-card">
+            <h5 class="text-center mb-4 text-gradient">Connect With Us</h5>
+            <div class="d-flex justify-content-center social-icons">
+                <a href="#" class="mx-3 social-icon">
+                    <div class="rounded-circle p-3" style="background: linear-gradient(135deg, #3b5998 0%, #1877f2 100%);">
+                        <i class="fab fa-facebook-f fa-2x text-white"></i>
+                    </div>
+                </a>
+                <a href="#" class="mx-3 social-icon">
+                    <div class="rounded-circle p-3" style="background: linear-gradient(135deg, #1da1f2 0%, #0077b5 100%);">
+                        <i class="fab fa-twitter fa-2x text-white"></i>
+                    </div>
+                </a>
+                <a href="#" class="mx-3 social-icon">
+                    <div class="rounded-circle p-3" style="background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);">
+                        <i class="fab fa-instagram fa-2x text-white"></i>
+                    </div>
+                </a>
+                <a href="#" class="mx-3 social-icon">
+                    <div class="rounded-circle p-3" style="background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);">
+                        <i class="fab fa-linkedin-in fa-2x text-white"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        // Add animation to form submission
+        $('form').on('submit', function() {
+            $('button[type="submit"]').html('<i class="fas fa-spinner fa-spin me-2"></i>Sending...');
+        });
+        
+        // Add hover effects to contact cards
+        $('.glass-card').hover(
+            function() {
+                $(this).find('i.fa-2x').addClass('animate__animated animate__heartBeat');
+            },
+            function() {
+                $(this).find('i.fa-2x').removeClass('animate__animated animate__heartBeat');
+            }
+        );
+    });
+</script>
+{% endblock %}
+{% endblock %}

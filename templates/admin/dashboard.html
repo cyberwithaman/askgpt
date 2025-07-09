@@ -1,0 +1,165 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<style>
+    .dashboard-container {
+        padding: 20px;
+    }
+    .stats-card {
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+    .stats-card .card-header {
+        font-weight: bold;
+        border-bottom: none;
+    }
+    .stats-card .card-body {
+        padding: 1.5rem;
+    }
+    .stats-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    .chart-container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .chart-container h3 {
+        margin-bottom: 15px;
+        color: #333;
+    }
+    .chart-img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+    .no-data-message {
+        text-align: center;
+        padding: 50px 0;
+        color: #6c757d;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Stats Cards -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card stats-card bg-primary text-white">
+                <div class="card-header bg-transparent">FAQs</div>
+                <div class="card-body">
+                    <div class="stats-number">{{ faq_count }}</div>
+                    <p class="card-text">Total FAQs in database</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stats-card bg-success text-white">
+                <div class="card-header bg-transparent">Contacts</div>
+                <div class="card-body">
+                    <div class="stats-number">{{ contact_count }}</div>
+                    <p class="card-text">Contact form submissions</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stats-card bg-info text-white">
+                <div class="card-header bg-transparent">Queries</div>
+                <div class="card-body">
+                    <div class="stats-number">{{ query_count }}</div>
+                    <p class="card-text">User queries received</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stats-card bg-warning text-dark">
+                <div class="card-header bg-transparent">Follow-ups</div>
+                <div class="card-body">
+                    <div class="stats-number">{{ followup_count }}</div>
+                    <p class="card-text">Queries needing follow-up</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if query_chart or contact_chart or faq_chart or followup_chart %}
+    <!-- Charts -->
+    <div class="row mt-4">
+        {% if query_chart %}
+        <div class="col-md-6">
+            <div class="chart-container">
+                <h3>User Queries (Last 30 Days)</h3>
+                <img src="data:image/png;base64,{{ query_chart }}" alt="User Queries Chart" class="chart-img">
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if contact_chart %}
+        <div class="col-md-6">
+            <div class="chart-container">
+                <h3>Contact Submissions (Last 30 Days)</h3>
+                <img src="data:image/png;base64,{{ contact_chart }}" alt="Contact Submissions Chart" class="chart-img">
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if faq_chart %}
+        <div class="col-md-6">
+            <div class="chart-container">
+                <h3>FAQs Added by Month</h3>
+                <img src="data:image/png;base64,{{ faq_chart }}" alt="FAQs Added Chart" class="chart-img">
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if followup_chart %}
+        <div class="col-md-6">
+            <div class="chart-container">
+                <h3>Query Follow-up Status Distribution</h3>
+                <img src="data:image/png;base64,{{ followup_chart }}" alt="Follow-up Status Chart" class="chart-img">
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% else %}
+    <div class="no-data-message">
+        <h3>No data available for visualization</h3>
+        <p>Add some FAQs, contacts, or user queries to see charts here.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extrajs %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+    // Add any JavaScript for the dashboard here
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animation for stats cards
+        const statsCards = document.querySelectorAll('.stats-card');
+        statsCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100 * index);
+        });
+    });
+</script>
+{% endblock %} 
