@@ -337,7 +337,7 @@ askgpt/
 ## 👤 Author
 <strong>Aman Anil (cyberwithaman)</strong>
 
-<a href="mailto:cyberwithaman@gmail.com"><img src="https://img.icons8.com/color/48/000000/gmail-new.png" alt="Email"/></a>
+<a href="mailto:amananiloffial@gmail.com"><img src="https://img.icons8.com/color/48/000000/gmail-new.png" alt="Email"/></a>
 <a href="tel:+917892939127"><img src="https://img.icons8.com/color/48/000000/phone.png" alt="Phone"/></a>
 <a href="https://www.instagram.com/cyberwithaman"><img src="https://img.icons8.com/color/48/000000/instagram-new.png" alt="Instagram"/></a>
 <a href="https://wa.me/+917892939127"><img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp"/></a>
